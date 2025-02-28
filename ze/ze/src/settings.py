@@ -19,8 +19,8 @@ class Settings:
         follow file system changes after initialization.
     """
 
-    BASE_DIR: Optional[str] = Path(__file__).resolve().parent
-    CONF_DIR: Optional[str] = os.path.join(Path(__file__).resolve().parent, 'configs')
+    BASE_DIR: Optional[str] = Path.cwd()
+    CONF_DIR: Optional[str] = os.path.join(Path.cwd(), 'configs')
 
 
 settings: Settings = Settings()

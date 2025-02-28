@@ -27,10 +27,9 @@ class ConfigParser(ABC):
         Returns:
             dict: Parsed configuration data.
         """
-        
+
 
 class JSONParser(ConfigParser):
-
     @classmethod
     def parse(cls, file_path: str) -> dict:
         """Parses a JSON configuration file."""
@@ -39,32 +38,29 @@ class JSONParser(ConfigParser):
 
 
 class TOMLParser(ConfigParser):
-    
     @classmethod
     def parse(cls, file_path: str) -> dict:
         """Parses a YAML configuration file."""
-        with open(file_path, "rb") as file:
+        with open(file_path, 'rb') as file:
             return tomllib.load(file)
 
 
 class YAMLParser(ConfigParser):
-    
     @classmethod
     def parse(cls, file_path: str) -> dict:
         """Parses a YAML configuration file."""
-        with open(file_path, "rb") as file:
+        with open(file_path, 'rb') as file:
             return yaml.safe_load(file)
 
 
 class ENVParser(ConfigParser):
-    
     @classmethod
     def parse(cls, file_path: str) -> dict:
         """Parses a .env configuration file."""
         config = {}
-        with open(file_path, 'r') as file:
-            for line in file:
-                line = line.strip()
+        with open(file_path, 'r', encoding='utf-8') as file:
+            for default_line in file:
+                line = default_line.strip()
                 if line and not line.startswith('#'):
                     key, value = line.split('=', 1)
                     config[key] = value

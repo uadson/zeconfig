@@ -1,3 +1,3 @@
 from .main import config
 
-__all__ = ["config"]
+__all__ = ['config']
