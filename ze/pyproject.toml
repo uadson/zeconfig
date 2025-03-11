@@ -22,6 +22,11 @@ dev = [
     "ruff==0.9.7",
     "taskipy==1.14.1",
 ]
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.7",
+    "mkdocstrings[python]>=0.29.0",
+]
 
 [tool.setuptools]
 packages = ["ze", "ze.src"]

@@ -1,0 +1,24 @@
+site_name: ZeConfig Documentation
+nav:
+  - Home: index.md
+  - Project:
+    - Models:
+        - ConfigParser: config_parser_model.md
+        - JSONParser: json_parser_model.md
+        - TOMLParser: toml_parser_model.md
+        - YAMLParser: yaml_parser_model.md
+        - ENVParser: env_parser_model.md
+    - Factory:
+        - ParserFactory: parser_factory.md
+    - Core: core.md
+    - Settings: settings.md
+    - Manager: manager.md
+    - Main: main.md
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
