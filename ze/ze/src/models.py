@@ -1,12 +1,11 @@
 import json
-from abc import ABC, abstractmethod
-
 import yaml
 
 try:
     import tomllib
 except ImportError:
     import tomli as tomllib
+from abc import ABC, abstractmethod
 
 
 class ConfigParser(ABC):

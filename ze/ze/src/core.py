@@ -1,4 +1,6 @@
 import os
+import time
+from enum import Enum
 from typing import AnyStr, Dict, List
 
 from .factory import ParserFactory
@@ -47,11 +49,20 @@ def get_file_data(config_files: List, config_data: Dict, path: AnyStr):
             config_files.append(entry.name)
 
     for file in config_files:
-        if file.endswith('.json'):
+        if file.endswith(".json"):
             parse_data(config_data, path, file)
-        elif file.endswith('.toml'):
+        elif file.endswith(".toml"):
             parse_data(config_data, path, file)
-        elif file.endswith(('.yaml', '.yml')):
+        elif file.endswith((".yaml", ".yml")):
             parse_data(config_data, path, file)
-        elif file.endswith('.env') or file.startswith('.env'):
+        elif file.endswith(".env") or file.startswith(".env"):
             parse_data(config_data, path, file)
+
+
+class ExecutionMode(str, Enum):
+    STANDARD = "standard"
+    DJANGO = "django"
+    FASTAPI = "fastapi"
+
+
+def run_standard_mode(verbose: bool): ...
