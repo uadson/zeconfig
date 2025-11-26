@@ -3,7 +3,8 @@ name = "zeconfig"
 version = "0.1.4"
 description = "Configuration Manager Package"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
+
 dependencies = [
     "python-dotenv==1.0.1",
     "pyyaml==6.0.2",
@@ -11,6 +12,9 @@ dependencies = [
     "tomli>=2.2.1",
     "typer>=0.20.0",
 ]
+
+[project.scripts]
+ze = "ze.src.cli:main"
 
 [dependency-groups]
 dev = [
