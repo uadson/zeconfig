@@ -1,4 +1,5 @@
 import typer
+from core import get_root_path
 from rich.console import Console
 
 app = typer.Typer()
@@ -15,6 +16,7 @@ def init(
     """
     print('Executando a funcionalidade padrão...')
     print(f'Modo escolhido: {mode}')
+    console.print(f'Obtendo o caminho do diretório raiz: {get_root_path()}')
 
     if verbose:
         print('[LOG] Verbose ativado: Carregando módulos extras...')
@@ -36,5 +38,5 @@ def fastapi():
     print('Carregando configurações para o FastAPI...')
 
 
-if __name__ == '__main__':
+def main():
     app()
