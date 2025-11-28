@@ -45,7 +45,3 @@ def get_package_version():
     """
     Returns the version of the package.
     """
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    with open(BASE_DIR / "pyproject.toml", "rb") as f:
-        data = tomli.load(f)
-        console.print(f"[bold blue]Version: {data['project']['version']}[/bold blue]")
