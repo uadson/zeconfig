@@ -1,4 +1,4 @@
-from models import config_gen
+from .models import config_gen
 
 
 def get_root_path():
