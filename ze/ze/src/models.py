@@ -1,5 +1,3 @@
-import importlib.resources as pkg_resources
-import os
 from pathlib import Path
 from uuid import uuid4
 
@@ -15,24 +13,14 @@ class ConfigGen:
         self.__secret_key: str = None
         self.__allowed_hosts: list = None
         self.__debug: bool = True
-        self.__root_dir: Path = self.__set_root_path()
-        self.__envs_dir: Path = self.__set_envs_path()
+        self.__root_dir: Path = Path.cwd()  # Use o diretório de trabalho atual
 
-    @staticmethod
-    def __set_root_path():
-        root_package_name = __name__.split('.')[0]
+    def create_files_default(self):
+        """Creates default .env and settings.py files in the project root."""
+        self._create_envfile_default()
+        self._create_settings_default()
 
-        if root_package_name == '__main__':
-            return Path(__file__).resolve().parent.parent
-        else:
-            return pkg_resources.files(root_package_name)
-
-    def __set_envs_path(self):
-        envs_path = self.__root_dir / 'envs'
-        os.makedirs(envs_path, exist_ok=True)
-        return envs_path
-
-    def create_envfile_default(self):
+    def _create_envfile_default(self):
         """Creates a default .env file in the root directory."""
         self.__db_name = uuid4()
 
@@ -44,7 +32,7 @@ DB_NAME='{self.__db_name}'
 """
             )
 
-    def create_settings_default(self):
+    def _create_settings_default(self):
         """Creates a default settings.py file in the root directory."""
         with open(self.__root_dir / 'settings.py', 'w', encoding='utf-8') as pyfile:
             pyfile.write(
