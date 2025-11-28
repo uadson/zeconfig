@@ -23,14 +23,9 @@ pip install zeconfig
 
 ## Uso
 
-### 0. Criando um arquivo de configuração
-Na raiz do projeto, crie um arquivo com uma das extensões .toml, .json, .yaml, .yml ou .env.
+### 1. Crie um arquivo de configuração
 
-Por exemplo: config.json
-
-### 1. Formato do arquivo de configuração
-
-### Exemplo `config.json`
+Na raiz do projeto, crie um arquivo de configuração. Por exemplo, um `config.json`:
 
 ```json
 {

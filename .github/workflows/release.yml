@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*.*.*'  # Aciona o workflow sempre que uma tag começando com 'v' for empurrada
+      - "v*.*.*" # Aciona o workflow sempre que uma tag começando com 'v' for empurrada
 
 jobs:
   release:
@@ -17,4 +17,4 @@ jobs:
         with:
           body: "Automated release from GitHub Actions"
         env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
