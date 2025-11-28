@@ -1,5 +1,6 @@
 from pathlib import Path
-from uuid import uuid4
+from random import choice
+from string import ascii_lowercase, digits
 
 
 class ConfigGen:
@@ -15,14 +16,21 @@ class ConfigGen:
         self.__debug: bool = True
         self.__root_dir: Path = Path.cwd()  # Use o diretório de trabalho atual
 
+    @staticmethod
+    def create_hexadigits():
+        string = ascii_lowercase + digits
+        return ''.join(choice(string) for _ in range(8))
+
     def create_files_default(self):
-        """Creates default .env and settings.py files in the project root."""
+        """Creates default .env, settings.py and logger.py files in the project root."""
         self._create_envfile_default()
         self._create_settings_default()
+        self._create_logger_file()
 
     def _create_envfile_default(self):
         """Creates a default .env file in the root directory."""
-        self.__db_name = uuid4()
+        db_name = self.create_hexadigits()
+        self.__db_name = f'{db_name}.sqlite3'
 
         with open(self.__root_dir / '.env', 'w', encoding='utf-8') as env_file:
             env_file.write(
@@ -46,5 +54,36 @@ class Settings:
     DB_NAME: str = os.getenv("DB_NAME")
     DB_URL: str = f"{DB_CONNECTION_STRING}:///{DB_NAME}"
 settings: Settings = Settings()
+"""
+            )
+
+    def _create_logger_file(self):
+        """Creates a default logger.py file in the root directory."""
+        with open(self.__root_dir / 'logger.py', 'w', encoding='utf-8') as pyfile:
+            pyfile.write(
+                """
+                import logging
+import os
+from rich.logging import RichHandler
+from pathlib import Path
+from datetime import datetime
+
+
+def set_logger():
+    os.makedirs(os.path.join(Path.cwd(), "logs"), exists_ok=True)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s | %(levelname)-8s | %(message)s",
+        datefmt="[%Y-%m-%d %H:%M:%S]",
+        handlers=[
+            RichHandler(rich_tracebacks=True),
+            logging.FileHandler(
+                f"{os.path.join(Path.cwd(), 'logs', f'{datetime.now().strftime('%Y-%m-%d')}.log')}",
+                enconding="utf-8",
+            ),
+        ]
+    )
+    return logging.getLogger(__name__)
+logger = set_logger()
 """
             )

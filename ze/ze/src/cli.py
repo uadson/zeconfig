@@ -9,16 +9,18 @@ console = Console()
 
 @app.command()
 def init(
-    mode: str = typer.Argument('default', help='Modo de execução padrão.'),
-    verbose: bool = typer.Option(False, '--verbose', '-v', help='Exibe logs detalhados.'),
+    mode: str = typer.Argument("default", help="Default mode."),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="Show verbose output."),
 ):
     """
-    Cria variáveis de configuração padrão.
+    Create a .env, settings.py and logger.py files in the current working directory
     """
-    if mode == 'default':
+    if mode == "default":
         initialize_project()
     else:
-        console.print(f"[yellow]Mode '{mode}' not recognized. Using 'default'.[/yellow]")
+        console.print(
+            f"[yellow]Mode '{mode}' not recognized. Using 'default'.[/yellow]"
+        )
         initialize_project()
 
 
@@ -27,7 +29,7 @@ def django():
     """
     Estrutura de configurações para o Django
     """
-    print('Carregando configurações para o Django...')
+    print("Carregando configurações para o Django...")
 
 
 @app.command()
@@ -35,7 +37,7 @@ def fastapi():
     """
     Estrutura de configurações para o FastAPI
     """
-    print('Carregando configurações para o FastAPI...')
+    print("Carregando configurações para o FastAPI...")
 
 
 def main():
