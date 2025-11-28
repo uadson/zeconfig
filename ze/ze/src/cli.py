@@ -1,5 +1,5 @@
 import typer
-from .core import get_root_path
+from core import initialize_project
 from rich.console import Console
 
 app = typer.Typer()
@@ -16,12 +16,13 @@ def init(
     """
     Cria variáveis de configuração padrão.
     """
-    print("Executando a funcionalidade padrão...")
-    print(f"Modo escolhido: {mode}")
-    console.print(f"Obtendo o caminho do diretório raiz: {get_root_path()}")
-
-    if verbose:
-        print("[LOG] Verbose ativado: Carregando módulos extras...")
+    if mode == "default":
+        initialize_project()
+    else:
+        console.print(
+            f"[yellow]Mode '{mode}' not recognized. Using 'default'.[/yellow]"
+        )
+        initialize_project()
 
 
 @app.command()
