@@ -1,7 +1,8 @@
 import typer
 from rich.console import Console
 
-from .core import initialize_project
+from . import core
+
 
 app = typer.Typer()
 console = Console()
@@ -9,35 +10,44 @@ console = Console()
 
 @app.command()
 def init(
-    mode: str = typer.Argument("default", help="Default mode."),
+    mode: str = typer.Argument("default", help="Default Mode."),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Show verbose output."),
 ):
     """
     Create a .env, settings.py and logger.py files in the current working directory
     """
     if mode == "default":
-        initialize_project()
+        core.initialize_project()
     else:
         console.print(
             f"[yellow]Mode '{mode}' not recognized. Using 'default'.[/yellow]"
         )
-        initialize_project()
+        core.initialize_project()
 
 
 @app.command()
-def django():
+def fastapi(
+    mode: str = typer.Argument("FastAPI", help="FastAPI Mode."),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="Show verbose output."),
+):
     """
-    Estrutura de configurações para o Django
+    Create a .env, settings.py files in the current working directory
     """
-    print("Carregando configurações para o Django...")
+    if mode == "FastAPI":
+        core.initialize_fastapi_project()
+    else:
+        console.print(
+            f"[yellow]Mode '{mode}' not recognized. Using 'FastAPI'.[/yellow]"
+        )
+        core.initialize_fastapi_project()
 
 
 @app.command()
-def fastapi():
+def version():
     """
-    Estrutura de configurações para o FastAPI
+    Returns the version of the package.
     """
-    print("Carregando configurações para o FastAPI...")
+    core.get_package_version()
 
 
 def main():

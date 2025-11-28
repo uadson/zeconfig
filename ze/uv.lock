@@ -730,11 +730,12 @@ wheels = [
 
 [[package]]
 name = "zeconfig"
-version = "0.2.0"
+version = "0.2.1"
 source = { editable = "." }
 dependencies = [
     { name = "python-dotenv" },
     { name = "rich" },
+    { name = "tomli" },
     { name = "typer" },
 ]
 
@@ -760,6 +761,7 @@ docs = [
 requires-dist = [
     { name = "python-dotenv", specifier = "==1.0.1" },
     { name = "rich", specifier = ">=14.2.0" },
+    { name = "tomli", specifier = ">=2.2.1" },
     { name = "typer", specifier = ">=0.20.0" },
 ]
 
